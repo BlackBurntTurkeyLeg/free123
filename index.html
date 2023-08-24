@@ -1,0 +1,31 @@
+<head>
+<iframe src="https://anikatsu.me/" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="100%" width="%" allowfullscreen id = "iframe"></iframe>
+</head>
+<body>
+
+<script>
+const iframe = document.getElementById("iframe");
+const win = iframe.contentWindow
+const realopen =  win.open;
+const realreplace = win.replace;
+
+
+console.log(win.location.hostname)
+win.open  = function(url,...args){
+	const newurl = new URL(url);
+  console.log(url,newurl.host,win.location.hostname,)
+  if (newurl.host == win.location.hostname){
+  	realopen(url,...args)
+  }
+}
+
+win.replace  = function(url,...args){
+	const newurl = new URL(url);
+  console.log(url,newurl.host,win.location.hostname,)
+  if (newurl.host == win.location.hostname){
+  	replace(url,...args)
+  }
+}
+</script>
+
+</body>
